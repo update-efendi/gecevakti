@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Diyanet Vakit</title>
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:16px;max-width:720px}
+    .muted{color:#555}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .card{border:1px solid #e5e7eb;border-radius:16px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+    h1{font-size:18px;margin:6px 0 10px}
+    h2{font-size:16px;margin:0 0 10px}
+    .pill{padding:10px 12px;border-radius:14px;background:#f3f4f6;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .big{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+    .kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0}
+    .btn{padding:10px 12px;border-radius:12px;border:1px solid #d1d5db;background:white;cursor:pointer}
+    .btn:active{transform:scale(.99)}
+    select{padding:10px 12px;border-radius:12px;border:1px solid #d1d5db;min-width:220px}
+    .error{color:#b91c1c}
+    .bold{font-weight:700}
+  </style>
+</head>
+<body>
+  <h1>Diyanet Vakit (Türkiye)</h1>
+  <p class="muted">Namaz vakitleri + sıradaki vakit geri sayımı (aynı kartta) + gece bölümleri (ayrı kart) + hicrî tarih.</p>
+
+  <div class="row" style="margin-bottom:12px">
+    <button class="btn" id="btnLocate">Konumu Kullan</button>
+    <button class="btn" id="btnRefresh">Yenile</button>
+  </div>
+
+  <div id="status" class="muted" style="margin-bottom:12px"></div>
+
+  <div id="manual" class="card" style="display:none;margin-bottom:12px">
+    <h2>Manuel Seçim (Konum başarısızsa)</h2>
+    <div class="row">
+      <label>İl<br><select id="selCity"></select></label>
+      <label>İlçe<br><select id="selDistrict"></select></label>
+    </div>
+    <div style="margin-top:12px">
+      <button class="btn" id="btnManualGo">Seçimi Uygula</button>
+    </div>
+  </div>
+
+  <div id="cardA" class="card" style="display:none;margin-bottom:12px">
+    <h2 id="titleA">—</h2>
+    <div class="muted" id="hijriDate" style="margin-bottom:8px"></div>
+
+    <div class="pill" style="margin-bottom:10px">
+      <div>
+        <div class="muted" style="font-size:12px">Sıradaki</div>
+        <div class="big" id="nextName">—</div>
+      </div>
+      <div style="text-align:right">
+        <div class="muted" style="font-size:12px">Kalan</div>
+        <div class="big" id="nextLeft">--:--:--</div>
+      </div>
+    </div>
+
+    <div id="times"></div>
+  </div>
+
+  <div id="cardB" class="card" style="display:none">
+    <h2>Gece Bölümleri</h2>
+    <div id="night"></div>
+  </div>
+
+  <p id="err" class="error"></p>
+
+  <script src="app.js"></script>
+</body>
+</html>
